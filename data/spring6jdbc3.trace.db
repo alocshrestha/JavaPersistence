@@ -296,3 +296,12 @@ SELECT * FROM SPRING6JDBC3.SPEAKER SPRING6JDBC3.SPEAKER [42000-214]
 2025-05-19 20:42:36 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "SPRING6JDBC3" not found; SQL statement:
 SELECT * FROM SPRING6JDBC3 [42102-214]
+2025-05-20 14:24:30 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]SPRING6JDBC3.SPEAKER"; expected "SAVEPOINT, SCRIPT, SHUTDOWN, SHOW"; SQL statement:
+SPRING6JDBC3.SPEAKER [42001-214]
+2025-05-20 14:24:31 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]SPRING6JDBC3.SPEAKER"; expected "SAVEPOINT, SCRIPT, SHUTDOWN, SHOW"; SQL statement:
+SPRING6JDBC3.SPEAKER [42001-214]
+2025-05-20 14:24:36 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]SPRING6JDBC3.SPEAKER"; expected "SAVEPOINT, SCRIPT, SHUTDOWN, SHOW"; SQL statement:
+SPRING6JDBC3.SPEAKER [42001-214]
