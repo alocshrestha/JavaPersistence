@@ -1,6 +1,7 @@
 package com.pluralsight.conference.repository;
 
 import com.pluralsight.conference.model.Speaker;
+import com.pluralsight.conference.repository.util.SpeakerRowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -23,11 +24,7 @@ public class SpeakerRepositoryImpl implements SpeakerRepository {
 
 
     public List<Speaker> findAll() {
-        Speaker speaker = new Speaker();
-        speaker.setName("Aloc SH");
-        speaker.setSkill("Java");
-        List<Speaker> speakers = new ArrayList<>();
-        speakers.add(speaker);
+        List<Speaker> speakers = jdbcTemplate.query("select * from speaker", new SpeakerRowMapper());
         return speakers;
     }
 
@@ -47,6 +44,13 @@ public class SpeakerRepositoryImpl implements SpeakerRepository {
         insert.setGeneratedKeyName("id");
         Number key = insert.executeAndReturnKey(data);
         System.out.println(key);
-        return null;
+        return getSpeaker(key.intValue());
+    }
+
+    /*
+    getSpeaker - return the user which got created from the create method
+     */
+    private Speaker getSpeaker(int id){
+        return jdbcTemplate.queryForObject("select * from speaker where id = ?", new SpeakerRowMapper(), id);
     }
 }
