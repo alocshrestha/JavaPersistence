@@ -2,6 +2,11 @@ package com.pluralsight.conference.controller;
 
 import com.pluralsight.conference.model.Speaker;
 import com.pluralsight.conference.service.SpeakerService;
+import com.pluralsight.conference.util.ServiceError;
+import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,5 +59,23 @@ public class SpeakerController {
         speakerService.delete(id);
         return null;
     }
+
+    @GetMapping("/speaker/test")
+    public Object testException() {
+        throw new DataAccessException("Testing exception thrown") {};
+    }
+
+
+    /*
+    handle - exception handler to catch for all RuntimeException Classes.
+    for the body is a response entity typed as our ServiceError that handles any RuntimeException ex.
+    Contain any error as ServiceError gracefully.
+     */
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ServiceError> handle (RuntimeException ex){
+        ServiceError error = new ServiceError(HttpStatus.OK.value(), ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.OK); //will catch the exception being thrown from above and will generate valid resp back to our service
+    }
+
 
 }
