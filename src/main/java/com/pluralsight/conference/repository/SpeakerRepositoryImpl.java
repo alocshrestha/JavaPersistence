@@ -50,7 +50,19 @@ public class SpeakerRepositoryImpl implements SpeakerRepository {
     /*
     getSpeaker - return the user which got created from the create method
      */
-    private Speaker getSpeaker(int id){
+    @Override
+    public Speaker getSpeaker(int id){
         return jdbcTemplate.queryForObject("select * from speaker where id = ?", new SpeakerRowMapper(), id);
+    }
+
+    @Override
+    public Speaker update(Speaker speaker) {
+        jdbcTemplate.update("update speaker set name = ? where id = ?", speaker.getName(), speaker.getId());
+        return speaker;
+    }
+
+    @Override
+    public void update(List<Object[]> pairs) {
+        jdbcTemplate.batchUpdate("update speaker set skill = ? where id = ?", pairs);
     }
 }
