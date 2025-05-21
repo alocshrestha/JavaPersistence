@@ -77,4 +77,12 @@ class Spring6jdbc3ApplicationTests {
 
     }
 
+    @Test
+    void testException() {
+        RestTemplate restTemplate = new RestTemplate();
+        //why return the speaker.class? We are not going to return a speaker out but to test our exception handling functionality.
+        restTemplate.getForObject("http://localhost:8080/speaker/test", Speaker.class);
+
+    }
+
 }
